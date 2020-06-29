@@ -3,12 +3,14 @@ package br.com.rafael.springbootmongodb.services;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.rafael.springbootmongodb.domain.User;
 import br.com.rafael.springbootmongodb.repository.UserRepositry;
+import br.com.rafael.springbootmongodb.services.exception.ObjectNotFoundException;
 
 @Service
 public class UserService {
@@ -20,6 +22,11 @@ public class UserService {
 		
 		return repo.findAll();
 		
+	}
+	
+	public User findById(String id) {
+		Optional<User> user = repo.findById(id);
+		return user.orElseThrow(()->new ObjectNotFoundException("Objeto não Encontrado" + id));
 	}
 
 }
