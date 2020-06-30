@@ -1,8 +1,12 @@
 package br.com.rafael.springbootmongodb.domain;
 
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "user")
@@ -17,6 +21,10 @@ public class User implements Serializable {
 	private String name;
 	
 	private String email;
+	
+	//Lazzy : so carrega quando acesso diretamente o objeto 
+	@DBRef(lazy = true)
+	private List<Post> posts = new ArrayList<>();
 
 	public String getId() {
 		return id;
@@ -42,7 +50,17 @@ public class User implements Serializable {
 		this.email = email;
 	}
 	
-	 public User() {
+	
+	
+	 public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
+
+	public User() {
 		// TODO Auto-generated constructor stub
 	}
 
