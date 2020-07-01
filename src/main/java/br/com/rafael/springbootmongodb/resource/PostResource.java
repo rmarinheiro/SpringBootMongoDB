@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.rafael.springbootmongodb.domain.Post;
 import br.com.rafael.springbootmongodb.domain.User;
 import br.com.rafael.springbootmongodb.dto.UserDTO;
+import br.com.rafael.springbootmongodb.resource.util.URL;
 import br.com.rafael.springbootmongodb.services.PostService;
 import br.com.rafael.springbootmongodb.services.UserService;
 
@@ -39,6 +41,18 @@ public class PostResource {
 		
 		
 	}
+	
+	@RequestMapping(value = "/titleSearch",method = RequestMethod.GET)
+	public ResponseEntity<List<Post>> findByTitle(@RequestParam(value = "text", defaultValue = "") String text){
+		text = URL.decodeParam(text);
+		List<Post> list = postService.findByTitle(text);
+		
+		return ResponseEntity.ok().body(list);
+		
+		
+	}
+	
+	
 	
 	
 

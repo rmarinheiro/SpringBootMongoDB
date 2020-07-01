@@ -2,6 +2,7 @@ package br.com.rafael.springbootmongodb.services;
 
 
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,10 @@ public class PostService {
 		Optional<Post> post = repo.findById(id);
 		
 		return post.orElseThrow(()-> new ObjectNotFoundException("Objeto Não Encontrado"));
+	}
+	
+	public List<Post> findByTitle(String text){
+		return repo.findByTitleContainingIgnoreCase(text);
 	}
 	
 	

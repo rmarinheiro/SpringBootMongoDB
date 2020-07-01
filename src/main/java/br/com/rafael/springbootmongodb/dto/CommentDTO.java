@@ -26,6 +26,36 @@ public class CommentDTO implements Serializable{
 		this.data = data;
 		this.authoDTO = authoDTO;
 	}
+
+
+	public String getText() {
+		return text;
+	}
+
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+
+	public Date getData() {
+		return data;
+	}
+
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+
+	public AuthorDTO getAuthoDTO() {
+		return authoDTO;
+	}
+
+
+	public void setAuthoDTO(AuthorDTO authoDTO) {
+		this.authoDTO = authoDTO;
+	}
 	
 	
 	
